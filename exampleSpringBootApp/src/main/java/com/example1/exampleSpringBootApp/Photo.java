@@ -9,7 +9,16 @@ public class Photo {
     @NotEmpty
     private String fileName;
 
+    public byte[] getData() {
+        return data;
+    }
+
+    public void setData(byte[] data) {
+        this.data = data;
+    }
+
     //row data
+    private byte[] data;
 
     public Photo(){
 
