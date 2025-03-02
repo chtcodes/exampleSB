@@ -1,5 +1,6 @@
-package com.example1.exampleSpringBootApp;
+package com.example1.exampleSpringBootApp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotEmpty;
 
 public class Photo {
@@ -9,6 +10,24 @@ public class Photo {
     @NotEmpty
     private String fileName;
 
+    //row data
+    @JsonIgnore
+    private byte[] data;
+
+    public String getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    private String contentType;
+
+
+
+
+
     public byte[] getData() {
         return data;
     }
@@ -17,8 +36,8 @@ public class Photo {
         this.data = data;
     }
 
-    //row data
-    private byte[] data;
+
+
 
     public Photo(){
 

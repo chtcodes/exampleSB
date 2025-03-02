@@ -1,7 +1,7 @@
-package com.example1.exampleSpringBootApp;
+package com.example1.exampleSpringBootApp.web;
 
-import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example1.exampleSpringBootApp.model.Photo;
+import com.example1.exampleSpringBootApp.service.PhotozService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -9,9 +9,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
 
 @RestController
 public class ExampleController {
@@ -36,7 +33,7 @@ public class ExampleController {
     }
 
     @GetMapping("/photoz")
-    public Collection<Photo> getPhoto(){
+    public Collection<Photo> getPhotos(){
         return photozService.getPhotos();
     }
 
@@ -56,17 +53,9 @@ public class ExampleController {
 
 
     @PostMapping("/photoupload")
-    public Photo createAPhoto(@RequestPart("image") MultipartFile file){
-      String fileName = file.getOriginalFilename();
-        byte[] data;
-        try {
-             data =    file.getBytes();
-        } catch (IOException e) {
-            throw new RuntimeException( "Error getting the image file: " + e );
-        }
+    public Photo createAPhoto(@RequestPart("image") MultipartFile file) throws IOException{
 
-        Photo photo = photozService.savePhoto(fileName, data);
-        return photo;
+        return  photozService.savePhoto(file.getOriginalFilename(), file.getContentType(), file.getBytes());
 
     }
 

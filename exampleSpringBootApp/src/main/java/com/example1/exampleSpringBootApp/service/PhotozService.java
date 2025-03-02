@@ -1,6 +1,6 @@
-package com.example1.exampleSpringBootApp;
+package com.example1.exampleSpringBootApp.service;
 
-import jakarta.validation.Valid;
+import com.example1.exampleSpringBootApp.model.Photo;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -24,11 +24,12 @@ public class PhotozService {
     }
 
 
-    public Photo savePhoto(String fileName, byte[] data) {
+    public Photo savePhoto(String fileName, String contentType, byte[] data) {
         Photo photo = new Photo();
         photo.setId(UUID.randomUUID().toString());
         photo.setFileName(fileName);
         photo.setData(data);
+        photo.setContentType(contentType);
 
         db.put(photo.getId(),photo);
         return photo;
